@@ -1,19 +1,37 @@
-import React, { useState } from 'react'
-import { useLocation } from "react-router-dom";
-function BookingScreen({props}) {
-    const [loading,setLoading]=useState(true)
-    const [error,setError]=useState()
-const siteUrl = window.location.pathname;
-var id = siteUrl.split("/").pop();
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+function BookingScreen({ props }) {
+    const [loading, setLoading] = useState();
+    const [error, setError] = useState()
+    const [room, setRoom] = useState()
+    const siteUrl = window.location.pathname;
+    var id = siteUrl.split("/").pop();
+    const fetchData = async () => {
+        try {
+            setLoading(true)
+            const data = await axios.get('api/rooms/getroombyid');
+            setRoom(data.data);
+            setLoading(false)
+        } catch (error) {
+            setError(true)
+            console.error(error.message);
+            setLoading(false)
+        }
 
+    }
+    useEffect(() => {
+
+        fetchData()
+
+    }, []);
 
 
 
     return (
 
         <div>
-   
-        
+
+
             {loading ? (<h1>loading...</h1>) :
                 error ? (<h>error...</h>) :
                     (
