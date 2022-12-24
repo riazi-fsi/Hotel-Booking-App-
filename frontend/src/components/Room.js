@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import {Link} from 'react-router-dom'
 
 function Room({ room }) {
     const [showModal, setShowModal] =useState(false);
+    console.log(room._id)
     return (
         <div className='container'>
         <div className='row bg-orange-300 w-3/4 p-2 m-3 border-2 center justify-center '>
@@ -9,7 +11,7 @@ function Room({ room }) {
             <p>Mac Count: {room.maxcount}</p>
             <p>Tel: {room.phonenumber}</p>
             <p>type:{room.type}</p>
-            <button className='bg-black text-white p-1 m-1 border-r-2 text-xs '>Book Now</button>
+           <Link to={`/book/${room._id}`}><button className='bg-black text-white p-1 m-1 border-r-2 text-xs '>Book Now</button></Link> 
             <button className='bg-black text-white p-1 m-1 border-r-2 text-xs'  onClick={() => setShowModal(true)}>View Details</button>
 
         </div>
