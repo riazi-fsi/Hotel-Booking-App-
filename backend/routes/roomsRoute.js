@@ -13,6 +13,18 @@ console.log(rooms)
   }
 })
 
-
+router.post('/getroombyid' , async (req , res)=>{
+ const roomid=req.body.roomid
+try {
+  const roomid=req.body.roomid
+  console.log(roomid)
+  const room=await Room.findOne({_id:roomid})
+console.log(room)
+  return res.send(room)
+  
+} catch (error) {
+  return res.status(400).json({message:error})
+}
+})
 
 module.exports  = router
