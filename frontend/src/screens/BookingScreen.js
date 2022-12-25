@@ -9,7 +9,7 @@ function BookingScreen({ props }) {
     const fetchData = async () => {
         try {
             setLoading(true)
-            const data = await axios.get('api/rooms/getroombyid');
+            const data = await axios.post('api/rooms/getroombyid',{roomid:id});
             setRoom(data.data);
             setLoading(false)
         } catch (error) {
